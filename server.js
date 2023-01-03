@@ -5,10 +5,11 @@ import mongoose from 'mongoose'
 
 import seedRouter from './routes/seedRoutes.js'
 import productRoutes from './routes/productRoutes.js'
+import userRoutes from './routes/userRoutes.js'
 
 dotenv.config()
 const app = express()
-
+app.use(express.json());
 
 app.use(cors())
 
@@ -30,6 +31,8 @@ app.use('/api/seed', seedRouter)
 //to fetch all the products
 app.use('/api/products', productRoutes)
 
+//all about user
+app.use('/api/user', userRoutes)
 
 const port = process.env.PORT || 4000
 

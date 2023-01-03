@@ -6,8 +6,7 @@ const productRoutes = express.Router()
 
 //fetching all the products
 productRoutes.get('/', async(req,res)=>{
-    console.log('aqui')
-
+   
     const products = await Product.find()
     res.send(products)
 
@@ -38,7 +37,7 @@ productRoutes.get('/slug/:slug', async(req, res) => {
 // //to check count in stock
 productRoutes.get('/:id', async (req, res) => {
     const { id } = req.params
-    console.log(id)
+   
     const product = await Product.findById(id)
 
     const stock = product.countInStock
