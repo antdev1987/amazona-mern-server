@@ -6,6 +6,7 @@ import mongoose from 'mongoose'
 import seedRouter from './routes/seedRoutes.js'
 import productRoutes from './routes/productRoutes.js'
 import userRoutes from './routes/userRoutes.js'
+import orderRoutes from './routes/orderRoutes.js'
 
 dotenv.config()
 const app = express()
@@ -26,13 +27,12 @@ mongoose.connect(process.env.MONGODB_URI)
 
 //creating sample
 app.use('/api/seed', seedRouter)
-
-
 //to fetch all the products
 app.use('/api/products', productRoutes)
-
 //all about user
 app.use('/api/user', userRoutes)
+//about orders
+app.use('/api/orders', orderRoutes)
 
 const port = process.env.PORT || 4000
 
