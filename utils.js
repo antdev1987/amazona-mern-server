@@ -7,8 +7,11 @@ export const generateToken = (user)=>{
 
 export const isAuth = (req,res,next) =>{
 
+
+  console.log('verificando ingreso')
+
     const authorization = req.headers.authorization
-    const token = authorization.split(' ')[1]
+    const token = authorization?.split(' ')[1]
 
     if(!token){
         return res.status(401).json({message:'no token, authorization denied'})

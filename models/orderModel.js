@@ -7,9 +7,9 @@ const orderSchema = new Schema(
 
     orderItems: [
       {
-        name: { type: String, required:true},
-        slug: { type: String, required: true},
-        image: { type: String, required: true},
+        name: { type: String, required: true },
+        slug: { type: String, required: true },
+        image: { type: String, required: true },
         quantity: { type: Number, required: true },
         price: { type: Number, required: true },
         productId: {
@@ -20,20 +20,32 @@ const orderSchema = new Schema(
       }
     ],
 
-    shippingAddress:{
-      fullName:{type: String, required:true},
-      address:{type: String, required:true},
-      postalCode:{type: String, required:true},
-      country:{type: String, required:true},
+    shippingAddress: {
+      fullName: { type: String, required: true },
+      address: { type: String, required: true },
+      postalCode: { type: String, required: true },
+      country: { type: String, required: true },
     },
 
-    paymentMethod : {type:String, required:true},
-    itemsPrice : {type:Number, required:true},
-    tax : {type:Number, required:true},
-    shippingPrice: {type:Number, required:true},
-    totalOrder:{type: Number, required:true},
+    paymentMethod: { type: String, required: true },
+    itemsPrice: { type: Number, required: true },
+    tax: { type: Number, required: true },
+    shippingPrice: { type: Number, required: true },
+    totalOrder: { type: Number, required: true },
 
-     user:{type:mongoose.Schema.Types.ObjectId, ref:'User', required:true}
+    paymentResult: {
+      id: String,
+      status: String,
+      update_time: String,
+      email_address: String,
+    },
+
+    isPaid:{type:Boolean, default:false},
+    paidAt:{type:Date},
+    isDelivered:{type:Boolean, default:false},
+    deliveredAt:{type:Date},
+
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
 
   },
   {

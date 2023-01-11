@@ -25,6 +25,11 @@ mongoose.connect(process.env.MONGODB_URI)
     })
 
 
+//this is to pass down the paypal's client id to front end
+app.get('/api/keys/paypal',(req,res)=>{
+    res.send(process.env.PAYPAL_CLIENT_ID || 'sb')
+})
+
 //creating sample
 app.use('/api/seed', seedRouter)
 //to fetch all the products
