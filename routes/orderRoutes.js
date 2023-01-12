@@ -34,6 +34,27 @@ orderRoutes.post('/', isAuth, async (req, res, next) => {
 })
 
 
+orderRoutes.get('/mine', isAuth, async (req, res) => {
+
+    try {
+        console.log('aqui en mine')
+        const orders = await Order.find({ user: req.user._id })
+
+        if (!orders.length > 0) {
+            return res.status(404).json({ message: 'You Dont have Any Orders' })
+        }
+
+       
+        res.send(orders)
+
+    } catch (error) {
+       
+        console.log(error)
+    }
+
+})
+
+
 //this is to send the orders by id in the place order page
 orderRoutes.get('/:id', isAuth, async (req, res, next) => {
 
@@ -63,28 +84,34 @@ orderRoutes.get('/:id', isAuth, async (req, res, next) => {
 
 })
 
-orderRoutes.put('/:id/pay', isAuth, async(req,res)=>{
+
+
+
+orderRoutes.put('/:id/pay', isAuth, async (req, res) => {
 
     console.log(req.body)
 
     const order = await Order.findById(req.params.id)
 
-    if(order){
+    if (order) {
         order.isPaid = true
         order.paidAt = Date.now()
-        order.paymentResult ={
+        order.paymentResult = {
             id: req.body.id,
             status: req.body.status,
-            update_time:req.body.update_time,
+            update_time: req.body.update_time,
             email_address: req.body.email_address
         }
         const updatedOrder = await order.save()
-        res.send({message:'order paid', order:updatedOrder})
-    }else{
-        res.status(404).send({message:'order not found'})
+        res.send({ message: 'order paid', order: updatedOrder })
+    } else {
+        res.status(404).send({ message: 'order not found' })
     }
 
 })
+
+
+
 
 
 
